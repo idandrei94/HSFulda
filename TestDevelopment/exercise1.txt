@@ -1,0 +1,64 @@
+Test cases
+
+1. Input test
+Making sure that data is correctly output after input
+Inputs:				tempErfassen will receive the following numbers [1,2,3,4,5,6,7], tempTagAusgabe will receive input 4
+Result/Output:		tempTagAusgabe will print out 4.0
+
+2. Average test
+Making sure that data is correctly processed
+Inputs:				tempErfassen will receive the following numbers [1,2,3,4,5,6,7], tempTagAusgabe will receive input 2 (irrelevant)
+Result/Output:		mittelwert will print out 4.0
+
+3. tempTagAusgabe invalid index test
+Making sure that tempTagAusgabe correctly handles an out of bound input
+Inputs:				tempErfassen will receive the following numbers [1,2,3,4,5,6,7], tempTagAusgabe will receive input 9
+Result/Output:		tempTagAusgabe will throw an error (program won't continue normal flow of execution)
+
+4. tempTagAusgabe invalid index test 2
+Making sure that tempTagAusgabe correctly handles wrong input type
+Inputs:				tempErfassen will receive the following numbers [1,2,3,4,5,6,7], tempTagAusgabe will receive input "three"
+Result/Output:		tempTagAusgabe will throw an error (program won't continue normal flow of execution
+
+5. Invalid input test (first value)
+Making sure that the program won't continue when first input is invalid
+Inputs:				tempErfassen will receive the following numbers ["one",2,3,4,5,6,7]
+Result/Output:		tempErfassen will throw an error (program won't continue normal flow of execution)
+
+6. Invalid input test (last value)
+Making sure that the program won't continue when last input is invald
+Inputs:				tempErfassen will receive the following numbers [1,2,3,4,5,6,"seven"]
+Result/Output:		tempErfassen will throw an error (program won't continue normal flow of execution)
+
+7. Invalid input test (non margin value)
+Making sure that the program won't continue when last input is invalid
+Inputs:				tempErfassen will receive the following numbers [1,2,3,"four",5,6,7]
+Result/Output:		tempErfassen will throw an error (program won't continue normal flow of execution)
+
+8. Consistency test
+Making sure the program always provides the same output for the same input (5 times)
+Input:				Running Test case 1 and 2
+Output:				Running Test case 1 and 2
+
+9. Irrelevant change test
+On multiple runs with slightly different input, the common input should yield the same result
+Run1:
+	Input:	tempErfassen will receive the following numbers [1,2,3,4,5,6,7], tempTagAusgabe will receive input 4
+	Output:	tempTagAusgabe will print out 4.0
+Run2:
+	Input:	tempErfassen will receive the following numbers [1,2,3,4,5,6,7], tempTagAusgabe will receive input 4
+	Output:	tempTagAusgabe will print out 4.0
+
+10.	Consistent average test
+mittelwert should print the same output for any permutation of a set tempErfassen input
+Run1:
+	Input: 	tempErfassen will receive the following numbers [1,2,3,4,5,6,7], tempTagAusgabe will receive input 4 (irrelevant)
+	Output:	mittelwert will print out 4.0
+Run2:
+	Input: 	tempErfassen will receive the following numbers [1,7,3,4,5,6,2], tempTagAusgabe will receive input 4 (irrelevant)
+	Output:	mittelwert will print out 4.0
+Run3:
+	Input: 	tempErfassen will receive the following numbers [6,4,7,1,5,2,3], tempTagAusgabe will receive input 4 (irrelevant)
+	Output:	mittelwert will print out 4.0
+	
+
