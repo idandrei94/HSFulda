@@ -2,7 +2,7 @@ import random
 import itertools
 import math
 import numpy
-SIZE = 500
+SIZE = 2
 
 def init_data():
     men = []
@@ -61,5 +61,9 @@ while(flag):
         if m_status[i] == -1:                   # man lf woman
             flag = True                         # we stop when all men are engaged
             find_wife(i, m_status, w_status, m_pref, w_pref)
+print(m_status)
+print(w_status)
+print(m_pref)
+print(w_pref)
 print("Calculation complete, result is", "correct" if check(m_status, w_status, m_pref, w_pref) else "incorrect")
 

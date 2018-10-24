@@ -15,3 +15,5 @@ def dGet(D, k):
 def dGet2(D,k):
     return any(k is x for x in D.keys())
 
+def dGet22(D,k):
+    return len(list(filter(lambda x : x is k, D.keys()))) > 0
