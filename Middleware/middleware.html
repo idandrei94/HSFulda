@@ -39,9 +39,16 @@
                             <button id='calc_button'>Calculate</button>
                             <button id='reset_button'>Reset</button>
                     </div>
+					<div class='col-md-12'>
+						<p id='webcount'> </p> 
+					</div>
             </div>
             <div class='col-md-4'></div>
             <script>
+				$.get("/api/webcount", function(data)  {
+					document.getElementById('webcount').innerText = "This page has been accessed " + data.count + (data.count == 1 ? ' time.' : " times.");
+				});
+
                 document.getElementById("date_area").value = "01.01.2012"
                 var reset_button = document.getElementById("reset_button")
                 reset_button.onclick = () => 
@@ -63,24 +70,26 @@
                     var name = document.getElementById("name_area").value
                     var height = document.getElementById("height_area").value
                     var weight = document.getElementById("weight_area").value
-                    var date = document.getElementById("date_area").value
+                    var currentDate = document.getElementById("date_area").value
                     var el = document.getElementById("result")
                     var date_regex = /^(0?[1-9]|[12][0-9]|3[01])[\.](0?[1-9]|1[012])[\.]\d{4}$/
-                    if(date.match(date_regex) == null)
-                        el.innerText = "ERROR! Invalid date"
+                    if(currentDate.match(date_regex) == null || isNaN(height) || isNaN(weight) || height <= 0 )
+                        el.innerText = "ERROR! Invalid input"
                     else
                     {
                         // This can be changed to be calculated through an API
                         //var bmi_result = weight / (height*height)
                         //el.innerText = "Hello " + name + "! Your BMI as of " + date + " is " + bmi_result + "."
-                        $.post("bmi",
+                        $.post("api/bmi",
                                         {
-                                            weight: weight,
-                                            height: height
+											name		: name,
+											currentDate	: currentDate,
+                                            weight		: weight,
+                                            height		: height
                                         },
                                         function(data, status){
                                             var bmi_result = data 
-                                            el.innerText = "Hello " + name + "! Your BMI as of " + date + " is " + bmi_result + "."
+                                            el.innerText = "Hello " + name + "! Your BMI as of " + currentDate + " is " + bmi_result + "."
                                         });
                     }
                 }
