@@ -3,11 +3,16 @@
 #include <stdlib.h> 
 #include <math.h>
 #include <stdint.h>
+#include <windows.h>
+#include <conio.h>
 
 // Solution to the stable marriage problem. 
 
+// Enable or disable graphics
+#define GRAPHICS 1
+
 // SIZE determines the group size (number of men or women)
-#define SIZE 500
+#define SIZE 20
 
 // Any available man/woman will have this status
 #define STATUS_AVAILABLE -1
@@ -22,6 +27,85 @@ int proposal_index[SIZE];
 *   @param arr          the array to be shuffled
 *   @post               the array's elements will be shuffled
 */
+
+void set_console_to_default()
+{
+    HANDLE  hConsole;
+    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+}
+
+void set_console_highlight()
+{
+    HANDLE  hConsole;
+    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY | FOREGROUND_GREEN);
+}
+
+void set_console_warning()
+{
+    HANDLE  hConsole;
+    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY | FOREGROUND_RED);
+}
+
+void set_console_xy(int x, int y)
+{
+    COORD coord;
+    coord.X = 8;
+    coord.Y = 8;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void clrscr()
+{
+    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+        system("clear");
+    #endif
+
+    #if defined(_WIN32) || defined(_WIN64)
+        system("cls");
+    #endif
+}
+
+void draw(
+    int m_status[SIZE], 
+    int w_status[SIZE],
+    int man,
+    int woman,
+    int dumped_man )
+{   
+    #ifdef GRAPHICS
+        #if GRAPHICS == 0
+            return;
+        #endif
+    #endif
+    clrscr();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        if (i == man)
+        {
+            set_console_highlight();
+            printf("Man #%d engaged to Woman #%d.\n", i+1, m_status[i]+1);
+            set_console_to_default();
+        }
+        else if (i == dumped_man)
+        {
+            set_console_warning();
+            printf("Man #%d dumped by Woman #%d.\n", i+1, woman+1);
+            set_console_to_default();
+        }
+        else
+        {
+            if(m_status[i] != -1)
+                printf("Man #%d engaged to Woman #%d.\n", i+1, m_status[i]+1);
+            else
+                printf("Man #%d is single.\n", i+1);
+        }
+    }
+    getchar();
+}
+
 void rand_perm(
     int arr[SIZE] )
 {
@@ -98,12 +182,15 @@ void propose(
     {
         w_status[woman] = man;                                       // Get engaged
         m_status[man] = woman;
+        draw(m_status, w_status, man, -1, -1);
     }
     else if(w_pref[woman][man] > w_pref[woman][w_status[woman]])     // Cheating gold digger? (likes this man more)
     {
-        m_status[w_status[woman]] = -1;                              // Dump the other man first
+        int dumped_man = w_status[woman];
+        m_status[dumped_man] = -1;                                   // Dump the other man first
         w_status[woman] = man;                                       // Get engaged
         m_status[man] = woman;
+        draw(m_status, w_status, man, woman, dumped_man);
     }
 }
 
@@ -216,9 +303,9 @@ int check(
     return 1;
 }
 
+int m_status[SIZE], w_status[SIZE], m_pref[SIZE][SIZE], w_pref[SIZE][SIZE];
 int main(void)
 {
-    int m_status[SIZE], w_status[SIZE], m_pref[SIZE][SIZE], w_pref[SIZE][SIZE];
     init_data(m_status, w_status, m_pref, w_pref);
 
     time_t real_time = time(NULL);
@@ -230,10 +317,8 @@ int main(void)
         find_wife(m_status, w_status, m_pref, w_pref, proposals);
         manage_proposals(m_status, w_status, m_pref, w_pref, proposals);
     }
-
-    real_time = time(NULL) - real_time;
-	cpu_time = clock() - cpu_time;
-
-    printf("Calculation complete in %f seconds and %f CPU time, result is %s", real_time, cpu_time, check(m_status, w_status, m_pref, w_pref) ? "correct.\n" : "incorrect.\n"); 
+    time_t end_real_time = time(NULL);
+	clock_t end_cpu_time = clock();
+    printf("Calculation complete in %d seconds and %f seconds CPU time, result is %s", end_real_time - real_time, ((float)(end_cpu_time - cpu_time))/CLOCKS_PER_SEC, check(m_status, w_status, m_pref, w_pref) ? "correct.\n" : "incorrect.\n"); 
     return EXIT_SUCCESS;
 }
