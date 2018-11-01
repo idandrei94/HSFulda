@@ -115,9 +115,9 @@ void draw(
 }
 
 /*  Shuffles an array
-*   @param arr  the array to be shuffled
-*   @pre        the random seed must be initialized prior to calling rand_perm
-*   @post       the array will contain a random permutation of the initial array
+*   @param arr          the array to be shuffled
+*   @pre                the random seed must be initialized prior to calling rand_perm
+*   @post               the array will contain a random permutation of the initial array
 */
 void rand_perm(
     int arr[SIZE] )
