@@ -28,6 +28,8 @@ int proposal_index[SIZE];
 *   @post               the array's elements will be shuffled
 */
 
+/*  Restores console background and foreground colors
+*/
 void set_console_to_default()
 {
     HANDLE  hConsole;
@@ -35,6 +37,8 @@ void set_console_to_default()
     SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 }
 
+/*  Sets the console foreground color to green
+*/
 void set_console_highlight()
 {
     HANDLE  hConsole;
@@ -42,6 +46,8 @@ void set_console_highlight()
     SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY | FOREGROUND_GREEN);
 }
 
+/*  Sets the console foreground color to red
+*/
 void set_console_warning()
 {
     HANDLE  hConsole;
@@ -49,14 +55,8 @@ void set_console_warning()
     SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY | FOREGROUND_RED);
 }
 
-void set_console_xy(int x, int y)
-{
-    COORD coord;
-    coord.X = 8;
-    coord.Y = 8;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
+/*  Clears the screen
+*/
 void clrscr()
 {
     #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
@@ -68,6 +68,14 @@ void clrscr()
     #endif
 }
 
+/*  Clears the screen and draws the current state.
+*   Should be called after each change in status
+*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
+*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
+*   @param man          the index of the man who'se status changed
+*   @param woman        the index of the woman the man just got engaged to, not needed if she was single prior to proposal
+*   @param dumped_man   the index of the man the woman was previously engaged to, -1 if she was single prio to proposal
+*/
 void draw(
     int m_status[SIZE], 
     int w_status[SIZE],
@@ -106,6 +114,11 @@ void draw(
     getchar();
 }
 
+/*  Shuffles an array
+*   @param arr  the array to be shuffled
+*   @pre        the random seed must be initialized prior to calling rand_perm
+*   @post       the array will contain a random permutation of the initial array
+*/
 void rand_perm(
     int arr[SIZE] )
 {
