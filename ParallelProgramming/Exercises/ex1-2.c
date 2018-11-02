@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#define CACHE_SIZE 10000
+#define CACHE_SIZE 1000
 
 unsigned long long fibonacci_seq(int n) 
 {

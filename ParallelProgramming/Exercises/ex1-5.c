@@ -41,7 +41,7 @@ int main(void)
                 printf("%d\t", i);
             #endif
             ;
-            uint64_t mp = (uint64_t)(powl(2,i)-1);
+            uint64_t mp = (uint64_t)(pow(2,i)-1);
             if(mp <= MAX && mp >= MIN)
             {
                 ++mp_counter;
@@ -56,7 +56,7 @@ int main(void)
                     #endif
                     if(mp != 1)
                     {
-                        uint64_t mpp = mp*(uint64_t)(powl(2, i-1));
+                        uint64_t mpp = mp*(uint64_t)(pow(2, i-1));
                         if(mpp < MAX)
                         {
                             ++mpp_counter;
