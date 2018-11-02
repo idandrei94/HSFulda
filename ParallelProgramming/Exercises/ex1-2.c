@@ -73,7 +73,7 @@ int main(void)
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
 	fib = fibonacci_seq(n);++fib;--fib;
-	printf("Sequential\t\t%d\t\t%d\t\t%d\t\t%d\n", 
+	printf("Sequential\t\t%d\t\t%d\t\t%.2f\t\t%.2f\n", 
 		n, 
 		fib, 
 		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
@@ -81,7 +81,7 @@ int main(void)
 	start_time = time(NULL);
 	start_clock = clock();
 	fib = fibonacci_rec(n);++fib;--fib;
-	printf("Recurrent\t\t%d\t\t%d\t\t%d\t\t%d\n", 
+	printf("Recurrent\t\t%d\t\t%d\t\t%.2f\t\t%.2f\n", 
 		n, 
 		fib, 
 		((double)clock()-start_clock)/CLOCKS_PER_SEC, 

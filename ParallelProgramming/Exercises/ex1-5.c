@@ -101,13 +101,13 @@ int main(void)
     printf("-----------------------------------------");
     printf("-----------------------------------------");
     printf("----------------------------------------\n");
-    printf("%d\t\t%d\t\t%d\t\t%d\t\t\t%d\t\t\t%d\t\t\t\t\t%.2f sec\t\t%d sec", 
+    printf("%d\t\t%d\t\t%d\t\t%d\t\t\t%d\t\t\t%d\t\t\t\t\t%.2f sec\t\t%.2f sec", 
         MIN, 
         MAX, 
         prime_counter,
          mp_counter, 
          mp_prime_counter, 
          mpp_counter, 
-         (clock()-start_clock)/CLOCKS_PER_SEC, time_diff(time(NULL),start_time));
+         ((double)clock()-start_clock)/CLOCKS_PER_SEC, difftime(time(NULL),start_time));
     return 0;
 }

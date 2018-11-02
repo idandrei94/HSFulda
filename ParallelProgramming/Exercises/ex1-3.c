@@ -2,8 +2,8 @@
 #include <time.h> 
 #include <stdlib.h> 
 
-#define ARR_SIZE 50000
-#define ARR_SIZE_BIG 100000
+#define ARR_SIZE        50000
+#define ARR_SIZE_BIG    100000
 
 int is_sorted(int arr[], size_t length)
 {
@@ -89,7 +89,7 @@ int main(void)
     if(!is_sorted(arr, ARR_SIZE))
         printf("### ERROR ###");
     int a = arr[ARR_SIZE/2];
-    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%d sec\n", 
+    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
         ARR_SIZE, 
         ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
         difftime(time(NULL), start_time));
@@ -103,7 +103,7 @@ int main(void)
     if(!is_sorted(arr_big, ARR_SIZE_BIG))
         printf("### ERROR ###");
     a = arr_big[ARR_SIZE_BIG/2];
-    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%d sec\n", 
+    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
         ARR_SIZE_BIG, 
         ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
         difftime(time(NULL),start_time));
@@ -117,7 +117,7 @@ int main(void)
     if(!is_sorted(arr, ARR_SIZE))
         printf("### ERROR ###");
     a = arr[ARR_SIZE/2];
-    printf("Select sort\t\t%d\t\t%.2f sec\t\t%d sec\n", 
+    printf("Select sort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
         ARR_SIZE, 
         ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
         difftime(time(NULL),start_time));
@@ -131,7 +131,7 @@ int main(void)
     if(!is_sorted(arr_big, ARR_SIZE_BIG))
         printf("### ERROR ###");
     a = arr_big[ARR_SIZE_BIG/2];
-    printf("Select sort\t\t%d\t\t%.2f sec\t\t%ld sec\n", 
+    printf("Select sort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
         ARR_SIZE_BIG, 
         ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
         difftime(time(NULL),start_time));
