@@ -74,7 +74,8 @@ int main(void)
     init_arr(template_big, ARR_SIZE_BIG);
 
 	printf("Algorithm\t\tN value\t\tCPU time\t\tReal time\n");
-	printf("-------------------------------------------------------------------------\n");
+	printf("-----------------------------------");
+    printf("--------------------------------------\n");
 
     int arr[ARR_SIZE];
     int arr_big[ARR_SIZE_BIG];
@@ -88,7 +89,10 @@ int main(void)
     if(!is_sorted(arr, ARR_SIZE))
         printf("### ERROR ###");
     int a = arr[ARR_SIZE/2];
-    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%d sec\n", ARR_SIZE, (clock() - start_clock)/1000.0, time(NULL) - start_time);
+    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%d sec\n", 
+        ARR_SIZE, 
+        ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+        difftime(time(NULL), start_time));
     
     copy_arr(template_big, arr_big, ARR_SIZE_BIG);
 
@@ -99,7 +103,10 @@ int main(void)
     if(!is_sorted(arr_big, ARR_SIZE_BIG))
         printf("### ERROR ###");
     a = arr_big[ARR_SIZE_BIG/2];
-    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%d sec\n", ARR_SIZE_BIG, (clock() - start_clock)/1000.0, time(NULL) - start_time);
+    printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%d sec\n", 
+        ARR_SIZE_BIG, 
+        ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+        difftime(time(NULL),start_time));
     
     copy_arr(template, arr, ARR_SIZE);
 
@@ -110,7 +117,10 @@ int main(void)
     if(!is_sorted(arr, ARR_SIZE))
         printf("### ERROR ###");
     a = arr[ARR_SIZE/2];
-    printf("Select sort\t\t%d\t\t%.2f sec\t\t%d sec\n", ARR_SIZE, (clock() - start_clock)/1000.0, time(NULL) - start_time);
+    printf("Select sort\t\t%d\t\t%.2f sec\t\t%d sec\n", 
+        ARR_SIZE, 
+        ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+        difftime(time(NULL),start_time));
     
     copy_arr(template_big, arr_big, ARR_SIZE_BIG);
 
@@ -121,7 +131,10 @@ int main(void)
     if(!is_sorted(arr_big, ARR_SIZE_BIG))
         printf("### ERROR ###");
     a = arr_big[ARR_SIZE_BIG/2];
-    printf("Select sort\t\t%d\t\t%.2f sec\t\t%d sec\n", ARR_SIZE_BIG, (clock() - start_clock)/1000.0, time(NULL) - start_time);
+    printf("Select sort\t\t%d\t\t%.2f sec\t\t%ld sec\n", 
+        ARR_SIZE_BIG, 
+        ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+        difftime(time(NULL),start_time));
 
     return 0;
 }

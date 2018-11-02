@@ -5,7 +5,7 @@
 #define R 8
 
 
-void matrix_mul(int a[P][Q], int b[Q][R], int c[P][R])
+void matrix_mul(int a[][Q], int b[][R], int c[][R])
 {
 	for(int i = 0; i < P; ++i)
 	{
@@ -21,7 +21,7 @@ void matrix_mul(int a[P][Q], int b[Q][R], int c[P][R])
 	}
 }
 
-void print_matrix(int h, int w, int matrix[h][w])
+void print_matrix(int h, int w, int matrix[][w])
 {
 	for(int i = 0; i < P; ++i)
 	{

@@ -9,6 +9,13 @@ typedef struct Node
     struct Node *right;
 } Node;
 
+struct Node *create_node(int);
+struct Node *insert_node(struct Node *t, int);
+void print_tree_pre_order (struct Node *root);
+void print_tree_in_order (struct Node *root);
+void print_tree_post_order (struct Node *root);
+void delete_tree(struct Node *);
+
 struct Node *create_node(int data)
 {
     Node *newNode = malloc(sizeof(Node));
@@ -18,14 +25,18 @@ struct Node *create_node(int data)
     return newNode;
 }
 
-struct Node *insert_node(struct Node *root, int data)
+struct Node *insert_node(
+    struct Node *root, 
+    int data)
 {
     if(root == NULL)
     {
         return create_node(data);
     }
     if(root -> value == data)
+    {
         return root;
+    }
     Node *tempNode = root;
     if(tempNode -> value > data)
     {
@@ -33,6 +44,7 @@ struct Node *insert_node(struct Node *root, int data)
         {
             Node *newNode = create_node(data);
             tempNode->left = newNode;
+            return newNode;
         }
         else
         {

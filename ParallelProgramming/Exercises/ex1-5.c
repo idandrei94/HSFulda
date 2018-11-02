@@ -95,9 +95,19 @@ int main(void)
                 ;
         }
     }
-    printf("MIN\t\tMAX\t\tPrimes\t\tMersennes\t\tPrime Mersennes\t\tPerfect Mersennes\t\tCPU Time\t\tReal Time\n");
-    printf("---------------------------------------------------------------------------------");
-    printf("---------------------------------------------------------------------------------\n");
-    printf("%d\t\t%d\t\t%d\t\t%d\t\t\t%d\t\t\t%d\t\t\t\t\t%.2f sec\t\t%d sec", MIN, MAX, prime_counter, mp_counter, mp_prime_counter, mpp_counter, (clock()-start_clock)/1000.0, time(NULL)-start_time);
+    printf("MIN\t\tMAX\t\tPrimes\t\tMersennes\t\tPrime Mersennes\t");
+    printf("\tPerfect Mersennes\t\tCPU Time\t\tReal Time\n");
+    printf("----------------------------------------");
+    printf("-----------------------------------------");
+    printf("-----------------------------------------");
+    printf("----------------------------------------\n");
+    printf("%d\t\t%d\t\t%d\t\t%d\t\t\t%d\t\t\t%d\t\t\t\t\t%.2f sec\t\t%d sec", 
+        MIN, 
+        MAX, 
+        prime_counter,
+         mp_counter, 
+         mp_prime_counter, 
+         mpp_counter, 
+         (clock()-start_clock)/CLOCKS_PER_SEC, time_diff(time(NULL),start_time));
     return 0;
 }

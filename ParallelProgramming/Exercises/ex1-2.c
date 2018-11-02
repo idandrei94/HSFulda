@@ -40,7 +40,7 @@ unsigned long long fibonacci_rec(int n)
 		default:
 		;
 			unsigned long long fib1, fib2;
-			if(n-2 >= CACHE_SIZE || fibonacci_list[n-2] == 0) 
+			if( (n-2 >= CACHE_SIZE) || (fibonacci_list[n-2] == 0) )
 			{
 				fib1 = fibonacci_rec(n-2);
 				if(n-2 < CACHE_SIZE)
@@ -48,7 +48,7 @@ unsigned long long fibonacci_rec(int n)
 			}
 			else
 				fib1 = fibonacci_list[n-2];
-			if(n-1 >= CACHE_SIZE || fibonacci_list[n-1] == 0) 
+			if( (n-1 >= CACHE_SIZE) || (fibonacci_list[n-1] == 0) )
 			{
 				fib2 = fibonacci_rec(n-1);
 				if(n-1 < CACHE_SIZE)
@@ -68,13 +68,22 @@ int main(void)
 	int n = 46;
 	unsigned long long fib;
 	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n");
-	printf("-----------------------------------------------------------------------------------------\n");
+	printf("----------------------------------------");
+	printf("-------------------------------------------------\n");
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
 	fib = fibonacci_seq(n);++fib;--fib;
-	printf("Sequential\t\t%d\t\t%d\t\t%d\t\t%d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
+	printf("Sequential\t\t%d\t\t%d\t\t%d\t\t%d\n", 
+		n, 
+		fib, 
+		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
+		difftime(time(NULL), start_time));
 	start_time = time(NULL);
 	start_clock = clock();
 	fib = fibonacci_rec(n);++fib;--fib;
-	printf("Recurrent\t\t%d\t\t%d\t\t%d\t\t%d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
+	printf("Recurrent\t\t%d\t\t%d\t\t%d\t\t%d\n", 
+		n, 
+		fib, 
+		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
+		difftime(time(NULL), start_time));
 }

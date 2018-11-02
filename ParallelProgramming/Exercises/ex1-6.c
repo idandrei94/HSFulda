@@ -332,6 +332,6 @@ int main(void)
     }
     time_t end_real_time = time(NULL);
 	clock_t end_cpu_time = clock();
-    printf("Calculation complete in %d seconds and %f seconds CPU time, result is %s", end_real_time - real_time, ((float)(end_cpu_time - cpu_time))/CLOCKS_PER_SEC, check(m_status, w_status, m_pref, w_pref) ? "correct.\n" : "incorrect.\n"); 
+    printf("Calculation complete in %ld seconds and %f seconds CPU time, result is %s", diff_time(end_real_time - real_time), ((float)(end_cpu_time - cpu_time))/CLOCKS_PER_SEC, check(m_status, w_status, m_pref, w_pref) ? "correct.\n" : "incorrect.\n"); 
     return EXIT_SUCCESS;
 }
