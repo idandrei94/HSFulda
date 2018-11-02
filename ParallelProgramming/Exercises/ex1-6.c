@@ -3,13 +3,18 @@
 #include <stdlib.h> 
 #include <math.h>
 #include <stdint.h>
-#include <windows.h>
-#include <conio.h>
 
 // Solution to the stable marriage problem. 
 
 // Enable or disable graphics
-#define GRAPHICS 1
+#define GRAPHICS 0
+
+#ifdef GRAPHICS
+#if GRAPHICS
+#include <conio.h>
+#include <windows.h>
+#endif
+#endif
 
 // SIZE determines the group size (number of men or women)
 #define SIZE 20
@@ -27,6 +32,9 @@ int proposal_index[SIZE];
 *   @param arr          the array to be shuffled
 *   @post               the array's elements will be shuffled
 */
+
+#ifdef GRAPHICS 
+#if GRAPHICS
 
 /*  Restores console background and foreground colors
 */
@@ -113,6 +121,8 @@ void draw(
     }
     getchar();
 }
+#endif
+#endif
 
 /*  Shuffles an array
 *   @param arr          the array to be shuffled
@@ -195,7 +205,11 @@ void propose(
     {
         w_status[woman] = man;                                       // Get engaged
         m_status[man] = woman;
+#ifdef GRAPHICS
+#if GRAPHICS
         draw(m_status, w_status, man, -1, -1);
+#endif
+#endif
     }
     else if(w_pref[woman][man] > w_pref[woman][w_status[woman]])     // Cheating gold digger? (likes this man more)
     {
@@ -203,7 +217,11 @@ void propose(
         m_status[dumped_man] = -1;                                   // Dump the other man first
         w_status[woman] = man;                                       // Get engaged
         m_status[man] = woman;
+#ifdef GRAPHICS
+#if GRAPHICS
         draw(m_status, w_status, man, woman, dumped_man);
+#endif
+#endif
     }
 }
 
