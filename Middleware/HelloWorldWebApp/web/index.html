@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <!-- Latest compiled and minified CSS -->
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+
+<!-- Optional theme -->
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css' integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp' crossorigin='anonymous'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
+
+
+<head>
+<title>BMI Form</title>
+</head>
+<body style='background-color: lightgray'>
+    <center>
+            <h1 class='col-md-12'><b>BMI Form (Web Version 2018)</b> BMI Form (Web Version 2018)</h1>
+            <div class='col-md-4'></div>
+            <div class='col-md-4'>
+                    <div class='col-md-12'>
+                        <p class='col-md-6' style='text-align: left'>Name:</p>
+                        <input id='name_area' style='resize: none; height: 27px' class='col-md-6'>
+                    </div>
+                    <div class='col-md-12'>
+                        <p class='col-md-6' style='text-align: left'>Weight(kg):</p>
+                        <input id='weight_area' style='resize: none; height: 27px' class='col-md-6'>
+                    </div>
+                    <div class='col-md-12'>
+                        <p class='col-md-6' style='text-align: left'>Height(m):</p>
+                        <input id='height_area' style='resize: none; height: 27px' class='col-md-6'>
+                    </div>
+                    <div class='col-md-12'>
+                        <p class='col-md-6' style='text-align: left'>Date(dd.mm.yyyy):</p>
+                        <input id='date_area' style='resize: none; height: 27px' class='col-md-6'>
+                    </div>
+                    <div class='col-md-12'> <p id="result"></p></div>
+                    <div class='col-md-12'>
+                            <button id='calc_button'>Calculate</button>
+                            <button id='reset_button'>Reset</button>
+                    </div>
+					<div class='col-md-12'>
+						<p id='webcount'> </p> 
+					</div>
+            </div>
+            <div class='col-md-4'></div>
+            <script>
+				$.get("/api/webcount", function(data)  {
+					document.getElementById('webcount').innerText = "This page has been accessed " + data.count + (data.count == 1 ? ' time.' : " times.");
+				});
+
+                document.getElementById("date_area").value = "01.01.2012"
+                var reset_button = document.getElementById("reset_button")
+                reset_button.onclick = () => 
+                {
+                    console.log("reset was pressed")
+                    var el = document.getElementById("name_area")
+                    el.value = ""
+                    var el = document.getElementById("weight_area")
+                    el.value = ""
+                    var el = document.getElementById("height_area")
+                    el.value = ""
+                    var el = document.getElementById("date_area")
+                    el.value = ""
+                }
+                var calc_button = document.getElementById("calc_button")
+                calc_button.onclick = () => 
+                {
+                    console.log("Calculate was pressed")
+                    var name = document.getElementById("name_area").value
+                    var height = document.getElementById("height_area").value
+                    var weight = document.getElementById("weight_area").value
+                    var currentDate = document.getElementById("date_area").value
+                    var el = document.getElementById("result")
+                    var date_regex = /^(0?[1-9]|[12][0-9]|3[01])[\.](0?[1-9]|1[012])[\.]\d{4}$/
+                    if(currentDate.match(date_regex) == null || isNaN(height) || isNaN(weight) || height <= 0 )
+                        el.innerText = "ERROR! Invalid input"
+                    else
+                    {
+                        // This can be changed to be calculated through an API
+                        //var bmi_result = weight / (height*height)
+                        //el.innerText = "Hello " + name + "! Your BMI as of " + date + " is " + bmi_result + "."
+                        $.get("BMI",
+                                        {
+                                            name		: name,
+                                            currentDate         : currentDate,
+                                            weight		: weight,
+                                            height		: height
+                                        },
+                                        function(data, status){
+                                            var bmi_result = data 
+                                            el.innerText = "Hello " + name + "! Your BMI as of " + currentDate + " is " + bmi_result + "."
+                                        });
+                    }
+                }
+            </script>
+    </center>
+</body>
+</html>
