@@ -42,6 +42,7 @@ print("Inverted ", sample[::-1, ::-1])
 print("10 top rows set to 0", list(map(lambda x: np.array([0,0,0]), sample[0:10, ...])))
 print("10 top rows set to 0", list(map(lambda x: np.array([0,0,0]), sample[17:27:-1, ...])))
 print("invert and every second", (sample[::-1, ::-1])[0::2, 0::2]  )
+sample[0:10, :] = 0
 
 #g
 mask = trainl.argmax(axis=1)
