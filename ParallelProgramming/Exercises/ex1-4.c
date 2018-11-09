@@ -9,14 +9,27 @@ typedef struct Node
     struct Node *right;
 } Node;
 
-struct Node *create_node(int);
-struct Node *insert_node(struct Node *t, int);
-void print_tree_pre_order (struct Node *root);
-void print_tree_in_order (struct Node *root);
-void print_tree_post_order (struct Node *root);
-void delete_tree(struct Node *);
+struct Node *create_node(
+    int );
 
-struct Node *create_node(int data)
+struct Node *insert_node(
+    struct Node *, 
+    int );
+
+void print_tree_pre_order (
+    struct Node * );
+
+void print_tree_in_order (
+    struct Node * );
+
+void print_tree_post_order (
+    struct Node * );
+
+void delete_tree(
+    struct Node * );
+
+struct Node *create_node(
+    int data )
 {
     Node *newNode = malloc(sizeof(Node));
     newNode -> value = data;
@@ -67,7 +80,8 @@ struct Node *insert_node(
     }
 }
 
-void print_tree_pre_order (struct Node *root)
+void print_tree_pre_order (
+    struct Node * root )
 {
     if(root == NULL)
         return;
@@ -76,7 +90,8 @@ void print_tree_pre_order (struct Node *root)
     print_tree_pre_order(root -> right);
 }
 
-void print_tree_in_order (struct Node *root)
+void print_tree_in_order (
+    struct Node *root )
 {
     if(root == NULL)
         return;
@@ -85,7 +100,8 @@ void print_tree_in_order (struct Node *root)
     print_tree_in_order(root -> right);
 }
 
-void print_tree_post_order (struct Node *root)
+void print_tree_post_order (
+    struct Node *root )
 {
     if(root == NULL)
         return;
@@ -94,7 +110,8 @@ void print_tree_post_order (struct Node *root)
     printf("%d ", root -> value);
 }
 
-void delete_tree(struct Node *root) 
+void delete_tree(
+    struct Node *root ) 
 {
     if(root == NULL)
         return;
@@ -103,22 +120,27 @@ void delete_tree(struct Node *root)
     free(root);
 }
 
-int main(void)
+int main(
+    void )
 {
-    Node *root = insert_node(NULL, 50);
-    insert_node(root, 56);
-    insert_node(root, 46);
-    insert_node(root, 6);
-    insert_node(root, 27);
-    insert_node(root, 67);
-    insert_node(root, 65);
-    insert_node(root, 92);
-    insert_node(root, 90);
+	time_t start_time = time(NULL);
+	clock_t start_clock = clock();
+  Node *root = insert_node(NULL, 50);
+  insert_node(root, 56);
+  insert_node(root, 46);
+  insert_node(root, 6);
+  insert_node(root, 27);
+  insert_node(root, 67);
+  insert_node(root, 65);
+  insert_node(root, 92);
+  insert_node(root, 90);
 
-    print_tree_in_order(root);
+  print_tree_in_order(root);
     
-    delete_tree(root);
-    root = NULL;
-
-    return 0;
+  delete_tree(root);
+  root = NULL;
+  printf("\nCPU time:\t\t%.2f\t\tReal time: \t\t%.2f",
+		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
+		difftime(time(NULL), start_time));
+  return 0;
 }

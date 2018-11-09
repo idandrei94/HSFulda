@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 
 #define CACHE_SIZE 1000
 
-unsigned long long fibonacci_seq(int n) 
+unsigned long long fibonacci_list[CACHE_SIZE];
+
+unsigned long long fibonacci_seq(
+    int );
+unsigned long long fibonacci_rec(
+    int );
+
+unsigned long long fibonacci_seq(
+    int n ) 
 {
 	switch(n)
 	{
@@ -27,9 +36,8 @@ unsigned long long fibonacci_seq(int n)
 	}
 }
 
-unsigned long long fibonacci_list[CACHE_SIZE];
-
-unsigned long long fibonacci_rec(int n)
+unsigned long long fibonacci_rec(
+    int n )
 {
 	switch(n)
 	{
@@ -63,13 +71,14 @@ unsigned long long fibonacci_rec(int n)
 	}
 }
 
-int main(void)
+int main(
+    void )
 {
 	int n = 46;
 	unsigned long long fib;
 	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n");
-	printf("----------------------------------------");
-	printf("-------------------------------------------------\n");
+	printf("---------------------------------------------");
+	printf("-------------------------------------------\n");
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
 	fib = fibonacci_seq(n);++fib;--fib;
@@ -86,4 +95,5 @@ int main(void)
 		fib, 
 		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
 		difftime(time(NULL), start_time));
+  return EXIT_SUCCESS;
 }

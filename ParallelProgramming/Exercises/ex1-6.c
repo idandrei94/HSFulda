@@ -9,6 +9,10 @@
 // Enable or disable graphics
 #define GRAPHICS 1
 
+#if !(_WIN32)
+  #undef GRAPHICS 1
+#endif
+
 #ifdef GRAPHICS
 #if GRAPHICS
 #include <conio.h>
@@ -35,6 +39,19 @@ int proposal_index[SIZE];
 
 #ifdef GRAPHICS 
 #if GRAPHICS
+
+/*  Restores console background and foreground colors
+*/
+void set_console_to_default();
+/*  Sets the console foreground color to green
+*/
+void set_console_highlight();
+/*  Sets the console foreground color to red
+*/
+void set_console_warning();
+/*  Clears the screen
+*/
+void clrscr();
 
 /*  Restores console background and foreground colors
 */
@@ -89,6 +106,109 @@ void draw(
     int w_status[SIZE],
     int man,
     int woman,
+    int dumped_man );
+
+/*  Shuffles an array
+*   @param arr          the array to be shuffled
+*   @pre                the random seed must be initialized prior to calling rand_perm
+*   @post               the array will contain a random permutation of the initial array
+*/
+void rand_perm(
+    int arr[SIZE] );
+
+    /*  Initializes various initial values
+*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
+*   @post               random seed initialized
+*   @post               all spouse statuses are set to available
+*   @post               references of each man and woman are random permutations of [0..SIZE-1]
+*/
+
+void init_data(
+    int m_status[SIZE], 
+    int w_status[SIZE], 
+    int m_pref[][SIZE],
+    int w_pref[][SIZE] );
+
+/*  Finds the minimum value in an array
+*   @param arr          the array to search in
+*   @return             the minimum value in the arr
+*/
+int arr_min(
+    int arr[SIZE] );
+    
+/*  Make a man propose to a woman
+*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
+*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
+*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
+*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
+*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
+*   @post               if proposal successful, statuses will update accordingly
+*/
+void propose(
+    int m_pref[][SIZE], 
+    int w_pref[][SIZE], 
+    int m_status[SIZE], 
+    int w_status[SIZE], 
+    int man, 
+    int woman );
+
+/* Searches for a value in an array
+*   @param arr          the array to search in
+*   @param value        the value to search for
+*   @return             the first index where the value is found, -1 if not found
+*/
+int indexof(
+    int arr[SIZE], 
+    int value );
+
+/*  Each round single men pick a woman to propose to, engaged men pick -1
+*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
+*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
+*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
+*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
+*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
+*/
+void find_wife(
+    int m_status[SIZE], 
+    int w_status[SIZE], 
+    int m_pref[][SIZE], 
+    int w_pref[][SIZE], 
+    int proposals[SIZE] );
+
+/*  Each single man attempts to propose to the chosen woman
+*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
+*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
+*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
+*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
+*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
+*   @post               each successful proposal will alter the statuses of those involved
+*/
+void manage_proposals(
+    int m_status[SIZE], 
+    int w_status[SIZE], 
+    int m_pref[][SIZE], 
+    int w_pref[][SIZE], 
+    int proposals[SIZE] ) ;
+
+/*  Check if all couples are stable
+*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
+*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
+*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
+*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
+*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
+*   @return             1 if all pairs are stable, 0 otherwise
+*/
+int check(
+    int m_status[SIZE], 
+    int w_status[SIZE], 
+    int m_pref[][SIZE], 
+    int w_pref[][SIZE] );
+
+void draw(
+    int m_status[SIZE], 
+    int w_status[SIZE],
+    int man,
+    int woman,
     int dumped_man )
 {   
     #ifdef GRAPHICS
@@ -124,11 +244,6 @@ void draw(
 #endif
 #endif
 
-/*  Shuffles an array
-*   @param arr          the array to be shuffled
-*   @pre                the random seed must be initialized prior to calling rand_perm
-*   @post               the array will contain a random permutation of the initial array
-*/
 void rand_perm(
     int arr[SIZE] )
 {
@@ -142,12 +257,6 @@ void rand_perm(
     }
 }
 
-/*  Initializes various initial values
-*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
-*   @post               random seed initialized
-*   @post               all spouse statuses are set to available
-*   @post               references of each man and woman are random permutations of [0..SIZE-1]
-*/
 void init_data(
     int m_status[SIZE], 
     int w_status[SIZE], 
@@ -168,10 +277,6 @@ void init_data(
     }
 }
 
-/*  Finds the minimum value in an array
-*   @param arr          the array to search in
-*   @return             the minimum value in the arr
-*/
 int arr_min(
     int arr[SIZE] )
 {
@@ -182,14 +287,6 @@ int arr_min(
     return min;
 }
 
-/*  Make a man propose to a woman
-*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
-*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
-*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
-*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
-*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
-*   @post               if proposal successful, statuses will update accordingly
-*/
 void propose(
     int m_pref[][SIZE], 
     int w_pref[][SIZE], 
@@ -198,57 +295,47 @@ void propose(
     int man, 
     int woman )
 {
-    
-    if(woman == -1)                                                  // If the man's already engaged (doesn't want to propose anymore)
-        return;
-    if(w_status[woman] == -1)                                        // Is the woman available? 
-    {
-        w_status[woman] = man;                                       // Get engaged
-        m_status[man] = woman;
-#ifdef GRAPHICS
-#if GRAPHICS
+  if(woman == -1)                                                  // If the man's already engaged (doesn't want to propose anymore)
+    return;
+  if(w_status[woman] == -1)                                        // Is the woman available? 
+  {
+    w_status[woman] = man;                                       // Get engaged
+    m_status[man] = woman;
+    #ifdef GRAPHICS
+      #if GRAPHICS
         draw(m_status, w_status, man, -1, -1);
-#endif
-#endif
-    }
-    else if(w_pref[woman][man] > w_pref[woman][w_status[woman]])     // Cheating gold digger? (likes this man more)
-    {
-        int dumped_man = w_status[woman];
-        m_status[dumped_man] = -1;                                   // Dump the other man first
-        w_status[woman] = man;                                       // Get engaged
-        m_status[man] = woman;
-#ifdef GRAPHICS
-#if GRAPHICS
+      #endif
+    #endif
+  }
+  else if( w_pref[woman][man] > w_pref[woman][w_status[woman]])     
+  {
+    // Cheating gold digger? (likes this man more)
+    int dumped_man = w_status[woman];
+    m_status[dumped_man] = -1;                                   // Dump the other man first
+    w_status[woman] = man;                                       // Get engaged
+    m_status[man] = woman;
+    #ifdef GRAPHICS
+      #if GRAPHICS
         draw(m_status, w_status, man, woman, dumped_man);
-#endif
-#endif
-    }
+      #endif
+    #endif
+  }
 }
 
-/* Searches for a value in an array
-*   @param arr          the array to search in
-*   @param value        the value to search for
-*   @return             the first index where the value is found, -1 if not found
-*/
 int indexof(
     int arr[SIZE], 
     int value )
 {
-    for(int i = 0; i < SIZE; ++i)
+  for(int i = 0; i < SIZE; ++i)
+  {
+    if(arr[i] == value)
     {
-        if(arr[i] == value)
-            return i;
+      return i;
     }
-    return -1;
+  }
+  return -1;
 }
 
-/*  Each round single men pick a woman to propose to, engaged men pick -1
-*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
-*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
-*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
-*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
-*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
-*/
 void find_wife(
     int m_status[SIZE], 
     int w_status[SIZE], 
@@ -256,28 +343,23 @@ void find_wife(
     int w_pref[][SIZE], 
     int proposals[SIZE] )
 {
-    for(int man = 0; man < SIZE; ++man)
+  for(int man = 0; man < SIZE; ++man)
+  {
+    if(m_status[man] != -1)                                                
     {
-        if(m_status[man] != -1)                                                 // If engaged, don't propose to anyone
-        {
-            proposals[man] = -1;
-        }
-        else
-        {
-            proposals[man] = indexof(m_pref[man], SIZE-1-proposal_index[man]);  // Ask the next woman in order of preference
-            ++proposal_index[man];                                              // Next time will make a bigger compromise
-        }
+       // If engaged, don't propose to anyone
+      proposals[man] = -1;
     }
+    else
+    {
+      // Ask the next woman in order of preference
+      // Next time will make a bigger compromise
+      proposals[man] = indexof(m_pref[man], SIZE-1-proposal_index[man]);  
+      ++proposal_index[man];                                              
+      }
+  }
 }
 
-/*  Each single man attempts to propose to the chosen woman
-*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
-*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
-*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
-*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
-*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
-*   @post               each successful proposal will alter the statuses of those involved
-*/
 void manage_proposals(
     int m_status[SIZE], 
     int w_status[SIZE], 
@@ -285,74 +367,70 @@ void manage_proposals(
     int w_pref[][SIZE], 
     int proposals[SIZE] ) 
 {
-    for(int man = 0; man < SIZE; ++man)
-        propose(m_pref, w_pref, m_status, w_status, man, proposals[man]);
+  for(int man = 0; man < SIZE; ++man)
+  {
+    propose(m_pref, w_pref, m_status, w_status, man, proposals[man]);
+  }
 }
 
-/*  Check if all couples are stable
-*   @param m_pref       2D square matrix, m_pref[i][j] is "i" man's rating for woman "j"
-*   @param w_pref       2D matrix, w_pref[i][j] is "i" woman's rating for man "j"
-*   @param m_status     the status of each man, either STATUS_AVAILABLE or the index of a woman ([0..SIZE-1])
-*   @param w_status     the status of each woman, either STATUS_AVAILABLE or the index of a man ([0..SIZE-1])
-*   @pre                the m_pref and w_pref matrices must be matrices of form [SIZE][SIZE]
-*   @return             1 if all pairs are stable, 0 otherwise
-*/
 int check(
     int m_status[SIZE], 
     int w_status[SIZE], 
     int m_pref[][SIZE], 
     int w_pref[][SIZE] )
 {
-    for(int i = 0; i < SIZE; ++i)
+  for(int i = 0; i < SIZE; ++i)
+  {
+    if(w_status[m_status[i]] != i)
     {
-        if(w_status[m_status[i]] != i)
-        {
-            printf("Incorrect match\n");
-            return 0;
-        }
-        for(int j = 0; j < SIZE; ++j)
-        {
-            if(i != j)                  // M1W1 M2W2 
-            {
-                int M1 = i;
-                int M2 = j;
-                int W1 = m_status[i];
-                int W2 = m_status[j];
-                if(w_pref[W2][M1] > w_pref[W2][M2] && m_pref[M1][W2] > m_pref[M1][W1])
-                {
-                    printf("Woman", W2, "and man", M1, "prefer each other over their spouses");
-                    return 0;
-                }
-                if(w_pref[W1][M2] > w_pref[W1][M1] && m_pref[M2][W1] > m_pref[M2][W2])
-                {
-                    printf("Woman", W1, "and man", M2, "prefer each other over their spouses");
-                    return 0;
-                }
-            }  
-        }
+      printf("Incorrect match\n");
+      return 0;
     }
-    return 1;
+    for(int j = 0; j < SIZE; ++j)
+    {
+      // M1W1 M2W2
+      if(i != j) 
+      {
+        int M1 = i;
+        int M2 = j;
+        int W1 = m_status[i];
+        int W2 = m_status[j];
+        if(w_pref[W2][M1] > w_pref[W2][M2] && m_pref[M1][W2] > m_pref[M1][W1])
+        {
+          printf("Woman", W2, "and man", M1, "prefer each other over their spouses");
+          return 0;
+        }
+        if(w_pref[W1][M2] > w_pref[W1][M1] && m_pref[M2][W1] > m_pref[M2][W2])
+        {
+          printf("Woman", W1, "and man", M2, "prefer each other over their spouses");
+          return 0;
+        }
+      } 
+    }
+  }
+  return 1;
 }
 
 int m_status[SIZE], w_status[SIZE], m_pref[SIZE][SIZE], w_pref[SIZE][SIZE];
-int main(void)
+int main(
+  void )
 {
-    init_data(m_status, w_status, m_pref, w_pref);
+  init_data(m_status, w_status, m_pref, w_pref);
 
-    time_t real_time = time(NULL);
+  time_t real_time = time(NULL);
 	clock_t cpu_time = clock();
 
-    while(arr_min(m_status) == -1)
-    {
-        int proposals[SIZE];
-        find_wife(m_status, w_status, m_pref, w_pref, proposals);
-        manage_proposals(m_status, w_status, m_pref, w_pref, proposals);
-    }
-    time_t end_real_time = time(NULL);
+  while(arr_min(m_status) == -1)
+  {
+    int proposals[SIZE];
+    find_wife(m_status, w_status, m_pref, w_pref, proposals);
+    manage_proposals(m_status, w_status, m_pref, w_pref, proposals);
+  }
+  time_t end_real_time = time(NULL);
 	clock_t end_cpu_time = clock();
-    printf("Calculation complete in %.2f seconds and %.2f seconds CPU time, result is %s", 
-        difftime(end_real_time,real_time), 
-        ((double)(end_cpu_time - cpu_time))/CLOCKS_PER_SEC, 
-        check(m_status, w_status, m_pref, w_pref) ? "correct.\n" : "incorrect.\n"); 
-    return EXIT_SUCCESS;
+  printf("Calculation complete in %.2f seconds and %.2f seconds CPU time, result is %s", 
+    difftime(end_real_time,real_time), 
+    ((double)(end_cpu_time - cpu_time))/CLOCKS_PER_SEC, 
+    check(m_status, w_status, m_pref, w_pref) ? "correct.\n" : "incorrect.\n"); 
+  return EXIT_SUCCESS;
 }
