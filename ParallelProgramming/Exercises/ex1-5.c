@@ -10,10 +10,10 @@
 #define IGNORE_PRINTF
 
 uint64_t prime(
-  int64_t );
+  uint64_t );
 
 uint64_t prime(
-  int64_t n )
+  uint64_t n )
 {
   if ( (n == 2) || (n == 3) )
   {
@@ -34,10 +34,14 @@ uint64_t prime(
 int main(
     void )
 {
-	time_t start_time = time(NULL);
-	clock_t start_clock = clock();
-  int prime_counter = 0, mp_counter = 0;
-  int mp_prime_counter = 0, mpp_counter = 0;
+  time_t start_time;
+  clock_t start_clock;
+  int prime_counter, mp_counter, mp_prime_counter, mpp_counter;
+  uint64_t mp;
+  start_time = time(NULL);
+  start_clock = clock();
+  prime_counter = 0, mp_counter = 0;
+  mp_prime_counter = 0, mpp_counter = 0;
   for(uint64_t i = MIN; i < MAX; ++i)
   {
     if(prime(i))
@@ -47,7 +51,7 @@ int main(
         printf("%d\t", i);
       #endif
       ;
-      uint64_t mp = (uint64_t)(pow(2,i)-1);
+      mp = (uint64_t)(pow(2,i)-1);
       if(mp <= MAX && mp >= MIN)
       {
         ++mp_counter;
@@ -62,7 +66,7 @@ int main(
           #endif
           if(mp != 1)
           {
-            uint64_t mpp = mp*(uint64_t)(pow(2, i-1));
+            double mpp = (pow(2, i-1)) * mp;
             if(mpp < MAX)
             {
               ++mpp_counter;
@@ -105,13 +109,13 @@ int main(
   }
   printf("MIN\tMAX\tPrimes\tMersennes\tPrime Mersennes\t");
   printf("\tPerfect Mersennes\tCPU Time\tReal Time\n");
-  printf("%d\t%d\t%d\t%d\t\t%d\t\t\t\t%d\t\t%.2f sec\t%.2f sec", 
+  printf("%d\t%d\t%d\t%d\t\t%d\t\t\t\t%d\t\t%.2f sec\t%.2f sec\n", 
     MIN, 
     MAX, 
     prime_counter,
     mp_counter, 
     mp_prime_counter, 
     mpp_counter, 
-    ((double)clock()-start_clock)/CLOCKS_PER_SEC, difftime(time(NULL),start_time));
+    (double)(clock()-start_clock)/CLOCKS_PER_SEC, difftime(time(NULL),start_time));
     return EXIT_SUCCESS;
 }

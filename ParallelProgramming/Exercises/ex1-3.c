@@ -105,32 +105,33 @@ int main(
   void )
 {
   int template[ARR_SIZE];
+  int template_big[ARR_SIZE_BIG];
+  int arr[ARR_SIZE];
+  int arr_big[ARR_SIZE_BIG];
+  clock_t start_clock;
+  time_t start_time;
+  
   init_arr(template, ARR_SIZE);
 
-  int template_big[ARR_SIZE_BIG];
   init_arr(template_big, ARR_SIZE_BIG);
 
 	printf("Algorithm\t\tN value\t\tCPU time\t\tReal time\n");
 	printf("-------------------------------------");
   printf("------------------------------------\n");
 
-  int arr[ARR_SIZE];
-  int arr_big[ARR_SIZE_BIG];
-    
   copy_arr(template, arr, ARR_SIZE);
 
-  time_t start_time = time(NULL);
-	clock_t start_clock = clock();
+  start_time = time(NULL);
+  start_clock = clock();
     
   bubble_sort(arr, ARR_SIZE);
   if(!is_sorted(arr, ARR_SIZE))
   {
     printf("### ERROR ###");
   }
-  int a = arr[ARR_SIZE/2];
   printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE, 
-    ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+    (double)(clock() - start_clock)/CLOCKS_PER_SEC, 
     difftime(time(NULL), start_time));
     
   copy_arr(template_big, arr_big, ARR_SIZE_BIG);
@@ -143,10 +144,9 @@ int main(
   {
     printf("### ERROR ###");
   }
-  a = arr_big[ARR_SIZE_BIG/2];
   printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE_BIG, 
-    ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+    (double)(clock() - start_clock)/CLOCKS_PER_SEC, 
     difftime(time(NULL),start_time));
     
   copy_arr(template, arr, ARR_SIZE);
@@ -159,10 +159,9 @@ int main(
   {
     printf("### ERROR ###");
   }
-  a = arr[ARR_SIZE/2];
   printf("Select sort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE, 
-    ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+    (double)(clock() - start_clock)/CLOCKS_PER_SEC, 
     difftime(time(NULL),start_time));
     
   copy_arr(template_big, arr_big, ARR_SIZE_BIG);
@@ -175,10 +174,9 @@ int main(
   {
         printf("### ERROR ###");
   }
-  a = arr_big[ARR_SIZE_BIG/2];
   printf("Select sort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE_BIG, 
-    ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
+    (double)(clock() - start_clock)/CLOCKS_PER_SEC, 
     difftime(time(NULL),start_time));
 
   return EXIT_SUCCESS;

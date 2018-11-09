@@ -14,17 +14,17 @@ unsigned long long fibonacci_rec(
 unsigned long long fibonacci_seq(
     int n ) 
 {
+	unsigned long long fib1, fib2, tmp;
 	switch(n)
 	{
 		case 0: 
-			return 0;
 		case 1:
-			return 1;
+			return n;
 		default:
 			;
-			unsigned long long fib1 = 1;
-			unsigned long long fib2 = 1;
-			unsigned long long tmp = 0;
+			fib1 = 1;
+			fib2 = 1;
+			tmp = 0;
 			for(int i = 2; i < n; ++i)
 			{
 				tmp = fib1 + fib2;
@@ -39,15 +39,14 @@ unsigned long long fibonacci_seq(
 unsigned long long fibonacci_rec(
     int n )
 {
+	unsigned long long fib1, fib2, res;
 	switch(n)
 	{
 		case 0: 
-			return 0;
 		case 1:
-			return 1;
+			return n;
 		default:
 		;
-			unsigned long long fib1, fib2;
 			if( (n-2 >= CACHE_SIZE) || (fibonacci_list[n-2] == 0) )
 			{
 				fib1 = fibonacci_rec(n-2);
@@ -64,7 +63,7 @@ unsigned long long fibonacci_rec(
 			}
 			else
 				fib2 = fibonacci_list[n-1];
-			unsigned long long res = fib1+fib2;
+			res = fib1+fib2;
 			fibonacci_list[n] = res;
 			return res;
 			
@@ -76,24 +75,25 @@ int main(
 {
 	int n = 46;
 	unsigned long long fib;
-	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n");
-	printf("---------------------------------------------");
-	printf("-------------------------------------------\n");
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
-	fib = fibonacci_seq(n);++fib;--fib;
-	printf("Sequential\t\t%d\t\t%d\t\t%.2f\t\t%.2f\n", 
+
+	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n"
+	       "---------------------------------------------"
+	       "-------------------------------------------\n");
+	fib = fibonacci_seq(n);
+	printf("Sequential\t\t%d\t\t%llu\t\t%.2f\t\t%.2f\n", 
 		n, 
 		fib, 
-		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
+	       (double) (clock()-start_clock)/CLOCKS_PER_SEC, 
 		difftime(time(NULL), start_time));
 	start_time = time(NULL);
 	start_clock = clock();
 	fib = fibonacci_rec(n);++fib;--fib;
-	printf("Recurrent\t\t%d\t\t%d\t\t%.2f\t\t%.2f\n", 
+	printf("Recurrent\t\t%d\t\t%llu\t\t%.2f\t\t%.2f\n", 
 		n, 
 		fib, 
-		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
+	       (double) (clock()-start_clock)/CLOCKS_PER_SEC, 
 		difftime(time(NULL), start_time));
   return EXIT_SUCCESS;
 }
