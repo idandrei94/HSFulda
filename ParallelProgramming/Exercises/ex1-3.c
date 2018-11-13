@@ -127,7 +127,6 @@ int main(
   {
     printf("### ERROR ###");
   }
-  int a = arr[ARR_SIZE/2];
   printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE, 
     ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
@@ -143,7 +142,6 @@ int main(
   {
     printf("### ERROR ###");
   }
-  a = arr_big[ARR_SIZE_BIG/2];
   printf("Bubblesort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE_BIG, 
     ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
@@ -159,7 +157,6 @@ int main(
   {
     printf("### ERROR ###");
   }
-  a = arr[ARR_SIZE/2];
   printf("Select sort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE, 
     ((double)clock() - start_clock)/CLOCKS_PER_SEC, 
@@ -175,7 +172,6 @@ int main(
   {
         printf("### ERROR ###");
   }
-  a = arr_big[ARR_SIZE_BIG/2];
   printf("Select sort\t\t%d\t\t%.2f sec\t\t%.2f sec\n", 
     ARR_SIZE_BIG, 
     ((double)clock() - start_clock)/CLOCKS_PER_SEC, 

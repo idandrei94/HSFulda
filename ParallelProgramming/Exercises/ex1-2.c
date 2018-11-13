@@ -32,7 +32,6 @@ unsigned long long fibonacci_seq(
 				fib2 = tmp;
 			}
 			return fib2;
-			
 	}
 }
 
@@ -47,27 +46,34 @@ unsigned long long fibonacci_rec(
 			return 1;
 		default:
 		;
-			unsigned long long fib1, fib2;
-			if( (n-2 >= CACHE_SIZE) || (fibonacci_list[n-2] == 0) )
-			{
-				fib1 = fibonacci_rec(n-2);
-				if(n-2 < CACHE_SIZE)
-					fibonacci_list[n-2] = fib1;
-			}
-			else
-				fib1 = fibonacci_list[n-2];
-			if( (n-1 >= CACHE_SIZE) || (fibonacci_list[n-1] == 0) )
-			{
-				fib2 = fibonacci_rec(n-1);
-				if(n-1 < CACHE_SIZE)
-					fibonacci_list[n-1] = fib2;
-			}
-			else
-				fib2 = fibonacci_list[n-1];
-			unsigned long long res = fib1+fib2;
-			fibonacci_list[n] = res;
-			return res;
-			
+		unsigned long long fib1, fib2;
+		if( (n-2 >= CACHE_SIZE) || (fibonacci_list[n-2] == 0) )
+		{
+			fib1 = fibonacci_rec(n-2);
+			if(n-2 < CACHE_SIZE)
+      {
+				fibonacci_list[n-2] = fib1;
+      }
+		}
+		else
+    {
+			fib1 = fibonacci_list[n-2];
+    }
+		if( (n-1 >= CACHE_SIZE) || (fibonacci_list[n-1] == 0) )
+		{
+			fib2 = fibonacci_rec(n-1);
+			if(n-1 < CACHE_SIZE)
+      {
+				fibonacci_list[n-1] = fib2;
+      }
+		}
+		else
+    {
+			fib2 = fibonacci_list[n-1];
+    }
+		unsigned long long res = fib1+fib2;
+		fibonacci_list[n] = res;
+		return res;
 	}
 }
 
@@ -77,8 +83,6 @@ int main(
 	int n = 46;
 	unsigned long long fib;
 	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n");
-	printf("---------------------------------------------");
-	printf("-------------------------------------------\n");
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
 	fib = fibonacci_seq(n);++fib;--fib;

@@ -5,6 +5,7 @@
  */
 package bmi;
 
+import beans.BMIBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.sql.*;
+import javax.ejb.EJB;
 
 /**
  *
@@ -28,6 +30,9 @@ import java.sql.*;
  */
 @WebServlet(name = "BMI", urlPatterns = {"/BMI"})
 public class BMI extends HttpServlet {
+
+    @EJB
+    private BMIBean bMIBean;
 
     private String name;
     private String date;
@@ -50,7 +55,11 @@ public class BMI extends HttpServlet {
             date = request.getParameter("currentDate");
             height = Integer.parseInt(request.getParameter("height"));
             weight = Integer.parseInt(request.getParameter("weight"));
-            double bmi = weight / (height * height);
+            
+            
+            
+            
+            double bmi = bMIBean.calcBMI(height, weight);
             response.setContentType("text/plain;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
                 out.print(bmi);
