@@ -40,11 +40,11 @@ void print_matrix(
   int w, 
   double matrix[][w] )
 {
-	for(int i = 0; i < P; ++i)
+	for(int i = 0; i < h; ++i)
 	{
-		for(int j = 0; j < Q; ++j)
+		for(int j = 0; j < w; ++j)
 		{
-			printf("%d ", matrix[i][j]);
+			printf("%f ", matrix[i][j]);
 		}
 		printf("\n");
 	}
@@ -73,7 +73,7 @@ int main(
   
 	matrix_mul(a,b,c);
   printf("CPU time:\t\t%.2f\t\tReal time: \t\t%.2f",
-		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
+		((double)(clock()-start_clock))/CLOCKS_PER_SEC, 
 		difftime(time(NULL), start_time));
 	//print_matrix(P,Q,a);
 	//print_matrix(Q,R,b);

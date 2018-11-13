@@ -42,6 +42,7 @@ struct Node *insert_node(
     struct Node *root, 
     int data)
 {
+    Node *tempNode;
     if(root == NULL)
     {
         return create_node(data);
@@ -50,7 +51,7 @@ struct Node *insert_node(
     {
         return root;
     }
-    Node *tempNode = root;
+    tempNode = root;
     if(tempNode -> value > data)
     {
         if(tempNode->left == NULL)
@@ -71,6 +72,7 @@ struct Node *insert_node(
         {
             Node *newNode = create_node(data);
             tempNode->right = newNode;
+	    return newNode;
         }
         else
         {
@@ -123,8 +125,8 @@ void delete_tree(
 int main(
     void )
 {
-	time_t start_time = time(NULL);
-	clock_t start_clock = clock();
+  time_t start_time = time(NULL);
+  clock_t start_clock = clock();
   Node *root = insert_node(NULL, 50);
   insert_node(root, 56);
   insert_node(root, 46);
@@ -140,7 +142,7 @@ int main(
   delete_tree(root);
   root = NULL;
   printf("\nCPU time:\t\t%.2f\t\tReal time: \t\t%.2f",
-		((double)clock()-start_clock)/CLOCKS_PER_SEC, 
+		(double)(clock()-start_clock)/CLOCKS_PER_SEC, 
 		difftime(time(NULL), start_time));
-  return 0;
+  return EXIT_SUCCESS;
 }

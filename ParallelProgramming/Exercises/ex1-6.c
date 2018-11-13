@@ -10,7 +10,7 @@
 #define GRAPHICS 1
 
 #if !(_WIN32)
-  #undef GRAPHICS 1
+  #undef GRAPHICS
 #endif
 
 #ifdef GRAPHICS
