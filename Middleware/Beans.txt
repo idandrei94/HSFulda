@@ -1,0 +1,88 @@
+Enterprise Beans
+	server component encapsulating business logic
+	simplify development by focusing on problem solving
+	separate business logic from client
+	Pros:
+		scalable app
+		transactions and data integrity (concurrent access)
+		client variety
+	Types:
+		Session 
+			Performs a task for a client; optionally, may implement a web service
+		Message-driven 
+			Acts as a listener for a particular messaging type, such as the Java Message Service API
+	Session beans are not persistent! Created on user request, hides complexity of the work, then POOF!
+	Session bean types:
+		Stateful session bean
+			Unique client bean session (conversational state)
+		Stateless session bean
+			Bean alive only during the invocation
+			Better scalability
+			Can implement a web service
+		Singleton session bean
+			One instance per app
+			Exist as long as the app does
+			Similar to stateless beans
+			Maintains state between invocations but not between server restarts
+		Message-driven beans
+			Async msg processing
+			JMS msg listener
+			Not accessed through interfaces, only has one class
+			No state <> all instances are equivalent <> concurrent msg processing
+			Can be transaction-aware
+			A single instance can process msg from multiple clients
+			Client components don't locate and call those directly
+	Accessing enterprise beans
+		Common sense public method/interface access?!
+		Obtained via dependency injection through javax.ejb.EJB, normal JSE apps must perform lookup
+		Bean accebility can be local or remote, it's an important decision!
+		Local clients
+			run in the same app
+			the location of the enterprise bean it access is not transparent
+			can be created by
+				base class not implementing business interface
+				using a @Local interface
+				specify the interface by decorating with @Local and specifying the interface name
+	Accessing local beans using the no-interface view
+		1. Obtain ref through dependency injection 
+			@EJB
+			ExampleBean exampleBean;
+		2. JNDI lookup
+			ExampleBean exampleBean = (ExampleBean) InitialContext.lookup("java:module/ExampleBean");
+		Clients DO NOT use the "new" operator
+	Remote clients
+		can run on a different machine / JVM
+		bean location is transparent
+		bean must implement business interface ( CANNOT access through no-interface view)
+	Web Service clients
+		access via	
+			JAX-WS
+			Invoking the business methods of the stateless session bean
+	Method parameters and access
+		local bean - pass by reference
+		remote bean - pass by value
+		coarse grained objects better for remote calls
+	Contents of enterprise beans
+		Class	 			- implements business methods and lifecycle callbacks
+		Business Interface	- define business methods implemented
+		Helper classes		- utility stuff
+	Lifecycle of a bean
+		Stateful session bean
+			Client gets a reference
+			Container performs required dep inj
+			@PostConstruct methods invoked
+			Bean can be deactivated (made passive) by being moved from RAM to storage
+			Client invokes @Remove method
+			EJB container calls the @PreDestroy methods
+		Stateless / Singleton bean
+			Get reference
+			Dep ink 
+			@postConstruct
+			@PreDestroy
+			never passivated
+		Message-driven bean
+			pool of beans
+				dep inj
+				@PostConstruct
+				@PreDestroy
+			not passivated

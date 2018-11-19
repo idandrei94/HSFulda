@@ -1,0 +1,80 @@
+Introduction to Contexts and Dependency Injection for Java EE (CDI)
+
+Connects the Web and Transactional Tiers
+It is a set of servicess enabling easy usage of beans along JavaServer Faces tech.
+Automatic dependency management (including lifecycles)
+Skip manual initializations of dependency objects, instead inject them after searching for a class that implements the interface (eg Message interface)
+	@Inject private Message message;
+The scope of the instance must be specified so it can be garbage collected.
+	@RequestScoped
+	public class MessageB implements Message { ... }		// This is called a CDI bean
+If more than one class implement the desired interface, Qualifiers or Alternatives in CDI must be used to specify which takes precedence
+
+CDI Services:
+	Context 				- bind lifecycles
+	Dependency injection 	- choose at deployment which implementation to used
+	Integration with EL		- usage of components with JavaServer Faces/Pages
+	Decoration of injected components
+	Typesafe association of interceptors and components
+	Event-notif model
+	Web conversation scope + request,session,application from Servlet
+	Complete SPI to integrate frameworks with JEE7
+	
+CDI - loose coupling
+	Client and server are decoupled, easy reimplementation of server
+	Contextual components, auto lifecycle mgmt
+	Stateful components interact through msg passing
+	Message producers/consumers use events
+	JEE Interceptors
+	
+CDI - Strong typed
+	No string-based lookup
+	Declarative annotations to specify everything, no more XML
+	
+Beans - contextual objects that define app state and/or logic
+		Attributes
+			- a nonempty set of bean types
+			- nonempty set of qualifiers
+			- scope
+			- EL name optionally
+			- Interceptor bindings
+			- Implementation
+		Almost any type can be a bean
+		
+Managed beans - implemented by a Java class (the bean class)
+		It is either
+			defined as managed bean by any other JEE tech specification or
+			meets the criteria:
+				It is not a nonstatic inner class.
+				It is a concrete class or is annotated @Decorator.
+				It is not annotated with an EJB component-defining annotation or declared as an
+					EJB bean class in ejb-jar.xml.
+				It has an appropriate constructor. That is, one of the following is the case.
+				The class has a constructor with no parameters.
+				The class declares a constructor annotated @Inject.
+				
+Beans as Injectable Objects
+	Injectable objects
+		(Almost) any Java class
+ 		Session beans
+ 		Java EE resources: data sources, Java Message Service topics, queues, connection
+			factories, and the like
+ 		Persistence contexts (Java Persistence API EntityManager objects)
+ 		Producer fields
+ 		Objects returned by producer methods
+ 		Web service references
+ 		Remote enterprise bean references
+		
+Qualifiers - annotations applied to beans
+	@Target({METHOD, FIELD, PARAMETER, TYPE})
+	@Retention(RUNTIME)
+	
+Injecting beans
+	@Inject Greeting greeting; 				// inject the @Default Greeting impl
+	@Inject @Informal Greeting greeting;  	// inject the @Informal implementation
+	
+Using scopes
+	Beans that inject other beans require holding state over the duration of the user interaction with the app
+	SOMEONE GIVE THAT BEAN A SCOPE
+	<big table of scopes and what they do>
+	Scopes are contectual (except @Dependent)
