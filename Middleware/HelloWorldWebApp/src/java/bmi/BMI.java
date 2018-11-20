@@ -6,6 +6,8 @@
 package bmi;
 
 import beans.BMIBean;
+import beans.IBMI;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
@@ -22,7 +24,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.sql.*;
-import javax.ejb.EJB;
+import java.util.Hashtable;
+import java.util.Properties;
+import javax.inject.Inject;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  *
@@ -31,8 +38,7 @@ import javax.ejb.EJB;
 @WebServlet(name = "BMI", urlPatterns = {"/BMI"})
 public class BMI extends HttpServlet {
 
-    @EJB
-    private BMIBean bMIBean;
+    private IBMI bMIBean;
 
     private String name;
     private String date;
@@ -55,8 +61,7 @@ public class BMI extends HttpServlet {
             date = request.getParameter("currentDate");
             height = Double.parseDouble(request.getParameter("height"));
             weight = Double.parseDouble(request.getParameter("weight"));
-            
-            
+            IBMI bMIBean = lookupRemoteStatelessCalculator();
             double bmi = bMIBean.calcBMI(height, weight);
             response.setContentType("text/plain;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
@@ -67,14 +72,13 @@ public class BMI extends HttpServlet {
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
             stmt = conn.createStatement();
-            sql = "INSERT INTO bmi VALUES('"+name+"','"+date+"', "+height+","+weight+");"; 
+            sql = "INSERT INTO bmi VALUES('" + name + "','" + date + "', " + height + "," + weight + ");";
             stmt.execute(sql);
             stmt = conn.createStatement();
             sql = "SELECT * FROM bmi";
             stmt.execute(sql);
             ResultSet res = stmt.executeQuery(sql);
-            while(res.next())
-            {
+            while (res.next()) {
                 String name = res.getString("name");
                 String date = res.getString("date");
                 double height = res.getFloat("height");
@@ -85,7 +89,7 @@ public class BMI extends HttpServlet {
                 System.out.println("Weight " + weight);
             }
             conn.close();
-            
+
         } catch (Exception ex) {
             response.setContentType("text/json;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
@@ -147,4 +151,12 @@ public class BMI extends HttpServlet {
         return c;
     }
 
+    private static IBMI lookupRemoteStatelessCalculator() throws NamingException, IOException {
+        try {
+            return (IBMI) InitialContext.doLookup("java:global/HelloWorldWebApp/BMIBean");
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            throw ex;
+        }
+    }
 }

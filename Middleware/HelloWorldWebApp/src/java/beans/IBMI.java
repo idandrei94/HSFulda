@@ -7,16 +7,11 @@ package beans;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-
 /**
  *
  * @author Entropy
  */
-@Stateless
-public class BMIBean implements IBMI {
-    @Override
-    public double calcBMI(double height, double weight)
-    {
-        return weight / (height * height);
-    }
+@Local
+public interface IBMI {
+    double calcBMI(double height, double weight);
 }
