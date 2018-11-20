@@ -1,0 +1,41 @@
+User stories
+
+#01. As a user I must be able to browse the items up for sale.
+#02. As a user I must be able to provide search parameters when searching for items, such as title and item category.
+#03. As a user I must be able to create an account
+#04. As a user I must be able to post a new item for sale.
+#05. As a user I must be able to manage my account by editing my account information.
+#06. As a user I want my account to be secure.
+#07. As a user I must be able to browse and manage the items I have posted for sale.
+#08. As a user I must be able to contact other users without having to provide personal contact information.
+#09. As a user I must be able to see if other users have contacted me.
+#10. As a user I must be able to check past conversations with other users.
+#11. As an admin I want to be able to browse unapproved items.
+#12. As an admin I want to be able to approve new items posted up for sale.
+#13. As a user I want to be redirected to the login page if I try to perform an action requiring authentication, if I am not logged in.
+
+Technical stories
+	Frontend:
+		#01. The frontend will provide a form for account creation, taking and validating relevant data.
+		#02.	The frontend will provide a login form.
+		#03. The frontend will allow the user to log out.
+		#04. The frontend will allow the user to input search parameters, like title and category.
+		#05. The frontend will provide a communications page where the user can browse conversations with other users.
+		#06. The frontend will provide a form for item sale creation, taking and validating relevant data. 
+		//TODO Since the frontend design choice is the main focus of team SF, maybe they should fill this forward
+	Backend:
+		#07. The backend has a user schema that shall be persistent through the database
+		#08. The backend API enables user authentication by checking the username and password with the stored data, creates and returns a session if successful.
+		#09. The backend has an item schema that shall be persistent through the database
+		#10. The backend API enables item searching by receiving search parameters and returning matching items. 
+		#11. The backend will not store media files locally. Instead, any media files will instead be uploaded to Amazon S3 and links to them will be stored in the item schema.
+		#12. The backend API enables item creation by receiving relevant parameters.
+		#13. The backend API item creation can receive an image from the user to be uploaded on the S3.
+		#14. The backend API item creation requires a valid user session to be referenced. Based on the session, the item owner account will be identified.
+		#15. The backend API enables account management by receiving new account info. If information is not sent, then the old value will be kept. Requires a valid user session to identify the user.
+		#16. The backend API enables item management by receiving an item id and new item data. If information is not sent, the old value will be kept. Requires a valid user session belonging to the owner of the item or the admin.
+		#17. The backend API enables the deletion of an item by receiving an item id. Requires a valid user session associated with the owner or admin.
+		#19. The backend has a message schema that shall be persistent through the database.
+		#18. The backend API enables sending a message to a user by receiving a username, message body and a valid user session. The sender will be identified by the session, messages will be stored in the database as conversations with 2 users.
+		#19. The backend API enables browsing messages by receiving a valid user session. Unread messages sent as a response will then be marked as read.
+		#20. The backend API will enable redirection to the login page if authentication is unsuccessful.

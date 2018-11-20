@@ -1,0 +1,38 @@
+Use cases:
+	User can	#01 sign up (create account)
+				#02 log in	(create session) 
+					#03 manage account (change info) - requires user session
+					#04 post an item for sale (add item) - requires user session
+					#05 remove an item from sale (delete item) - requires user session
+					#06 send a message to another user - requires user session
+					#07 check unread messages - requires user session
+					#08 check read messages (history) - requires user session
+				#09 search for items
+					by title
+					by category
+	Admin is a user that can also 
+					#10 approve sales (items need approval before being discoverable) - requires user session
+					#11	browse the unapproved item list
+					
+#01	Sign up
+	The sign up form allows to create an account by providing account information
+#02	Log in
+	After signing up, the user can use the login data to authenticate on the app
+#03	Manage account
+	A logged in user can change his account information that was entered during sign up
+#04	Post an item for sale (add item)
+	A logged in user can post an item for sale by providing item information.
+#05	Remove an item from sale
+	A logged in user can browse the items they put up for sale and can delete any of them.
+#06	Send message to another user
+	A logged in user can contact another user by sending them a message
+#07	Check unread messages
+	A logged in user can check for any new messages received from other users
+#08	Check read messages
+	A logged in user can browse their message history, up to 1 month
+#09	Search for items
+	A user can browse items posted for sale by providing search parameters such as title and/or category. Only approved items will be 
+#10
+	A logged in admin can change the status of an item to (un)approved.
+#11	Browse the unapproved item list
+	A logged in admin can browse through the list of items that have not been approved

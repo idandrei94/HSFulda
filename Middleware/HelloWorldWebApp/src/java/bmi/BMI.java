@@ -53,10 +53,8 @@ public class BMI extends HttpServlet {
         try {
             name = request.getParameter("name");
             date = request.getParameter("currentDate");
-            height = Integer.parseInt(request.getParameter("height"));
-            weight = Integer.parseInt(request.getParameter("weight"));
-            
-            
+            height = Double.parseDouble(request.getParameter("height"));
+            weight = Double.parseDouble(request.getParameter("weight"));
             
             
             double bmi = bMIBean.calcBMI(height, weight);
