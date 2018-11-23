@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define CACHE_SIZE 5000
+#define CACHE_SIZE 1
 
 unsigned long long fibonacci_list[CACHE_SIZE];
 
@@ -43,7 +43,7 @@ unsigned long long fibonacci_rec(
 	{
 		case 0: 
 		case 1:
-			return n;
+			return (unsigned long long)n;
 		default:
 		;
 			if( (n-2 >= CACHE_SIZE) || (fibonacci_list[n-2] == 0) )
@@ -74,7 +74,7 @@ unsigned long long fibonacci_rec(
 int main(
     void )
 {
-        int n = 10;
+        int n = 46;
         unsigned long long fib;
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
