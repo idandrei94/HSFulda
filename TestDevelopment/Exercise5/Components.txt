@@ -1,0 +1,12 @@
+Components
+
+1. UI 
+	Takes user input and initiates actions based on use cases
+2. Library Control
+	Takes requests from UI, communicates with the Materials, Users and Loans components to fulfill the request
+3. Materials
+	Manages material-related data such as material info, copies, persistence.
+4. Users
+	Manages user-related data such as user info, persistence.
+5. Loans
+	Manages loan related data. Manages entries about each active loan as well as persistence.

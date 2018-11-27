@@ -6,13 +6,14 @@
 package ejb.shoppingCart;
 
 import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
 /**
  *
  * @author Entropy
  */
-@Local
+@Remote
 public interface IShoppingCart {
 
     public boolean addProduct(String productID, int quantity);

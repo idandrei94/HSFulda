@@ -4,3 +4,7 @@
 /Middleware/HelloWorldWebApp/build/
 /Middleware/HelloWorldWebApp/dist/
 /Middleware/ShoppingCart/build/
+/Middleware/ShoppingCartMain/nbproject/private/
+/Middleware/ShoppingMain/nbproject/private/
+/Middleware/ShoppingMain/ShoppingMain-war/nbproject/private/
+/Middleware/ShoppingMain/ShoppingMain-ejb/nbproject/private/

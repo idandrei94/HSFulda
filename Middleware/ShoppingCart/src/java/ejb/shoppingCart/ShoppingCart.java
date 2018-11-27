@@ -20,7 +20,7 @@ import javax.enterprise.context.SessionScoped;
  */
 @Stateful
 @SessionScoped
-@StatefulTimeout(unit = TimeUnit.SECONDS, value = 5)
+@StatefulTimeout(unit = TimeUnit.SECONDS, value = 10)
 public class ShoppingCart implements IShoppingCart, Serializable {
     private List<Item> items;
 

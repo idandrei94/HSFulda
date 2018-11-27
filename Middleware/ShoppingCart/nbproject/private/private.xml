@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Q:/Entropy/doc/Arbeit/HS/HSFulda/Middleware/ShoppingCart/web/index.html</file>
-            <file>file:/Q:/Entropy/doc/Arbeit/HS/HSFulda/Middleware/ShoppingCart/src/java/ejb/shoppingCart/ItemDB.java</file>
-            <file>file:/Q:/Entropy/doc/Arbeit/HS/HSFulda/Middleware/ShoppingCart/src/java/ejb/shoppingCart/IShoppingCart.java</file>
-            <file>file:/Q:/Entropy/doc/Arbeit/HS/HSFulda/Middleware/ShoppingCart/src/java/ejb/Shopping/ShoppingServlet.java</file>
-            <file>file:/Q:/Entropy/doc/Arbeit/HS/HSFulda/Middleware/ShoppingCart/src/java/ejb/shoppingCart/Item.java</file>
-            <file>file:/Q:/Entropy/doc/Arbeit/HS/HSFulda/Middleware/ShoppingCart/src/java/ejb/shoppingCart/ShoppingCart.java</file>
+            <file>file:/Q:/Entropy/Documents/Arbeit/HSFulda/Middleware/ShoppingCart/src/java/MainClass.java</file>
+            <file>file:/Q:/Entropy/Documents/Arbeit/HSFulda/Middleware/ShoppingCart/src/java/ejb/shoppingCart/IShoppingCart.java</file>
+            <file>file:/Q:/Entropy/Documents/Arbeit/HSFulda/Middleware/ShoppingCart/src/java/ejb/shoppingCart/ShoppingCart.java</file>
+            <file>file:/Q:/Entropy/Documents/Arbeit/HSFulda/Middleware/ShoppingCart/src/java/ejb/Shopping/ShoppingServlet.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,0 +1,47 @@
+Use cases
+1. Register User
+	Add a new user into the system
+	Includes 	- a user name
+				- an address
+				- phone number
+				- unique identifier (auto-generated)
+2. Register material
+	Add a new entry for a material. It does not represent an individual physical item.
+	Includes	- type
+				- title
+				- author
+				- edition
+				- unique identifier
+3. Delete User
+	Remove a user from the system
+	Includes	- a unique user identifier
+4. Delete material
+	Remove material from the system. (eg This book cannot be found here)
+	Includes	- a material's unique identifier
+5. Borrow material
+	A user is requesting a material, he/she receives a copy of it which is logged
+	Includes	- a unique user identifier (who wants to borrow)
+				- a unique material identifier (what he/she wants to borrow)
+				- the datetime of loaning
+				- a Loan entry referencing the user and a specific copy of material if available is created
+6. Return material
+	Material is returned and is available again.
+	Includes	- a unique material identifier
+7. Add copy
+	For a registered material, add another physical copy of it.
+	Includes	- a unique material identifier
+				- a unique material copy identifier (auto generated)
+8. Remove copy
+	For a registered material, remove one of it's physical copies.
+	Includes	- a unique material identifier
+				- a unique material copy identifier
+9. Check material status
+	Check how many available/loaned copies of a material are
+	Includes	- a unique material identifier
+10.Check user status
+	Check any active user loans
+	Includes	- a unique user identifier
+11.List users
+	List data of all users registered
+12.List materials
+	List data of all materials

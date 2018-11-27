@@ -47,7 +47,7 @@ public class ShoppingServlet extends HttpServlet {
                 InitialContext ic = new InitialContext();
                 cartBean = (IShoppingCart) ic.lookup("java:global/ShoppingCart/ShoppingCart");
                 request.getSession().setAttribute(CART_SESSION_KEY, cartBean);
-                request.getSession().setMaxInactiveInterval(4);
+                request.getSession().setMaxInactiveInterval(10);
                 System.out.println("ShoppingCart created");
             } catch (NamingException e) {
                 System.out.println("Error getting session");
