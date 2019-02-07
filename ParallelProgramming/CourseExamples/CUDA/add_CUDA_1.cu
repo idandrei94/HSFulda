@@ -21,7 +21,7 @@
 #include <time.h>
 
 
-#define DEFAULT_VECTOR_SIZE  100000000	/* vector size (10^8)		*/
+#define DEFAULT_VECTOR_SIZE  100000	/* vector size (10^8)		*/
 #define DEFAULT_THREADS_PER_BLOCK 256
 #define DEFAULT_BLOCKS_PER_GRID   32
 
