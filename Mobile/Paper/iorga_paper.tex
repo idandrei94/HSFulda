@@ -2,6 +2,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs} % For formal tables
 \usepackage{balance} % For balanced columns on the last page
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tablefootnote}
 
 \copyrightyear{2019} 
 \acmYear{2019} 
@@ -77,34 +81,43 @@ Game engines such as Unity are convenient ways to center the development process
 % Processes all of the front-end information and starts the body of the work.
 \maketitle
 \section{Introduction}
-\subsection{Components of a game}
-\subsection{Games vs Hardware}
-\subsection{Space Shooter}
 \input{chapters/introduction}
+\section{Unity games}
+\subsection{Game components}
+\input{chapters/unitygames}
+\subsection{Games vs Hardware}
+\input{chapters/gamesvshardware}
+\subsection{Game platforms}
+\input{chapters/gameplatforms}
+\subsection{Space Shooter}
+\input{chapters/spaceshooter}
+\subsubsection{Game description}
+\input{chapters/gamedescription}
+\subsubsection{Game mechanics}
+\input{chapters/gamemechanics}
+\subsubsection{Effects}
+\input{chapters/gameeffects}
 \subsection{Performance testing}
-\input{chapters/1}
-\subsection{Improving performance}
-\input{chapters/2}
+\input{chapters/performancetesting}
+\subsubsection{Test environments}
+\input{chapters/testenv}
+\subsubsection{Measurements}
+\input{chapters/measurements}
+\subsubsection{Testing methodology}
+\input{chapters/testmethodology}
+\section{Improving performance}
+\input{chapters/improvingperformance}
+\subsection{Quality compromises}
+\input{chapters/quality}
+\subsection{Implementation strategy improvements}
+\input{chapters/scripts}
 \subsection{Object pooling}
-\input{chapters/3}
-\subsection{Texture resolution}
-\input{chapters/4}
+\input{chapters/pooling}
 \subsection{Object managers}
-\input{chapters/5}
 \section{Conclusions}
-XXX Some example text with cites: 
-Frameworks like Apple ARKit \cite{ARKit} and Google ARCore \cite{ARCore} provide an easy use of
-computer vision based tracking technologies to build new mobile Augmented Reality applications.
-XXX Especially in the automotive industry mobile AR-based training and infotainment apps, like 
-the "Mobile Augmented Reality Technical Assistance" project described in \cite{Stanimirovic14}, 
-are becoming more and more a selling point. Therefore, XXX
-%\input{chapters/relatedwork}
-%\input{chapters/concept}
-%\input{chapters/implementation}
-%\input{chapters/results}
-%\input{chapters/conclusions}
 \begin{acks}
 This work was carried out within the Web and Mobile Apps class.
+Credits to QINE, IGGY-DESIGN, PIXEL MAKE and NIGHTSOUNDGAMES for their visual models and effects available on the Unity Asset Store, that were used in the project.
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}

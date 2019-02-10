@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\caption{Gaming platform specs}
+\label{tab:conf}
+\begin{minipage}{\textwidth}
+\begin{center}
+\begin{tabular}{lllllll}
+Component & Xbox One X & iPad Pro 11 & Moto E 4 & Custom-built PC & Low-end Laptop \\
+CPU\footnote{Number of threads derived from core count and hyperthreading availability} & 8T x86 2.3 Ghz & 8T Apple A12X 2.26 Ghz & 4T ARM-A53 1.1 Ghz & 12T Intel 4.7 Ghz & 4T Intel 2.2Ghz \\
+GPU & Integrated AMD & PowerVR 7XT & ARM Mali-T720 & Nvidia RTX 2080Ti & Nvidia GT 940m \\
+GPU Compute power & 6 TFLOPs &  Not available &  Not available & 13.4 TFLOPs & 0.9 TFLOPs \\
+RAM & 12 GB & 4 GB & 2 GB  & 32 GB & 8 GB \\
+VRAM & 12 GB & Not available &  Not available & 11 GB & 2 GB \\
+VRAM Type\footnote{Shared VRAM systems show the total value for both RAM and VRAM} & Shared &  Not available &  Not available & Dedicated & Dedicated \\
+Storage & 1TB & 1TB\footnote{From 64 GB up to 1 TB} & 16 GB & 1.25 TB & 625 GB
+\end{tabular}
+\bigskip
+\footnotesize\emph{Note:} Specs taken via official product pages. \\
+\emph{Source:}\cite{rtxspecs} \cite{motospecs} \cite{xboxspecs} \cite{laptopspecs} \cite{intelspecs} 
+\end{center} 
+\end{minipage}
+\end{table*}
+As previously stated, Unity supports over 25  different platforms across mobile, desktop, TV, AR/VR and Web. In this paper we will focus our attention on PC and Android devices, PC because it is already the development environment for our sample game, and Android because of device availability as far as mobile platforms are concerned. This section will show a brief overview of various platforms and specs across the mainstream gaming choices, console, mobile and PC. \\ \\
+The fine differences between all the platforms and devices belonging in each are beyond the scope of this study, however, after just a glance (see Table 1), it is clear and reasonable that mobile devices are not dedicated gaming machines, falling short when compared to dedicated machines made for gaming (consoles such as the Xbox One X) or custom built PC's. This serves as a strong argument that great care must be taken when developing mobile games, as the mobile platform has many limitations imposed due to the very nature of the hardware used (thermal values, power, computational power, system resources). Naturally, there are other options beyond the three platforms depicted here, but since the main focus here is mobile development, going into more detail regarding all platforms proves to be extraneous.

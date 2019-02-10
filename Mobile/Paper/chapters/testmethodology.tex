@@ -1,0 +1,21 @@
+Because of the risk of interference from background processes competing for resources, each test will be repeated five consecutive times. During each test, the current framerate will be sampled every second and stored for the end results. Tests must contain all types of content available in Space Shooter except the defeat screen which is a trivial scene. The test data will be collected for a period of 30 seconds of play time. This value has been considered appropriate to the game's relative simplicity and will be enforced by adding an automatic game ending timer set for this period of time.\\
+Content types are:
+\begin{enumerate}
+\item Moving towards empty space (no asteroids)
+\item Moving towards the asteroid field
+\item Destroying an asteroid with the ship weapon
+\item Destroying a drone with the ship weapon
+\item Destroying an asteroid through collision
+\item Get hit by drone weapons several times
+\item Lost and regenerate ship shield
+\end{enumerate}
+Once all five tests are completed, the data from all will be combined. The combined data will then be compiled into the following information:
+\begin{enumerate}
+\item The mean framerate across the runs
+\item The standard deviation of the framerate
+\item The mean of the top 10\% of the entries
+\item The mean of the bottom 10\% of the entries
+\end{enumerate}
+The mean value across all samples provides the baseline for performance. It is the general value that tells us how the game performs overall. However, a high mean value may prove insufficient, as a potential bad practice during implementation may drastically lower performance of one component that is not present with high frequency and thus having a relatively small influence over the result. \\
+The standard deviation will indicate how stable the result is performance-wise. Ideally, everything is properly optimized and has a similar cost, therefore the framerates stay constant throughout the gameplay, indicated by a deviation value close to zero. On the other hand, if a particular game component is particularly slow, the framerate will dip by a big margin and will increase the standard deviation to reflect this imbalance. \\
+The top and bottop 10\% means are used to further identify extremes. A top 10\% mean close to the overall mean means the game is mostly optimized, as the majority of components performs quite similar to those that are relatively fast (it is highly improbable that every single game component and scenario is highly complex and inefficient, which would in any case be identified by a very low global mean). The bottom 10\% mean is used to identify how much worse the lower performing components operate compared to the rest. By constantly working to optimize the game aspects responsible for the bottom 10\% values, this value can be raised, decreasing the standard deviation and increasing the mean. In a real-world scenario, this process would be repeated incrementally until optimal results are met.
