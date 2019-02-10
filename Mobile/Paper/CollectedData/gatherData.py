@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import pandas as pd
 
-files = ["Compromise/pc.txt", "General/pc.txt", "Compromise/android.txt", "General/android.txt"]
+files = ["Original/pc.txt", "Pools/pc.txt", "Original/android.txt", "Pools/android.txt"]
 
 def parseData(filename):
     file = open(filename)
