@@ -1,0 +1,42 @@
+Task 1-1
+a) Things whose purpose is difficult to discern, through their presentation (names, pictures), location etc
+	How well does X name describe its purpose?
+b) Tiny distractions add up, wasting energy and time from the actual task. It's not a dramatic impact in itself, but if every action throughout a day 
+	was full of them, one would go to sleep cranky(er). We want happy users, not frustrated users
+c) A product (especially online) should be self-explanatorty
+d) "It's hard to go wrong", self evident or at least self explanatorty
+
+Task 1-2 2 examples
+Where should I start?
+  Too much (unneeded) information becomes confusing, the user has to sift through it for what they want. Imagine everything being on one single page,
+    every input, every piece of information. 
+Why is it called like that?
+  Names and titles, links etc should be self explanatory, or the user will wonder what the right action is. 
+  https://knowyourmeme.com/photos/264241-shut-up-and-take-my-money
+  This image would take me a while to realize it's for Job listings on a Job searching platform
+Can I click on that?
+  Links for example should be clearly marked. 
+  "Click here to start your download"  - click where?!?! If "here" is a link, it should be obvious and set apart from other text
+Is that X? Or is it over there?
+Why is that there?
+  The less something matches our way of thinking, the less intuitive it is.
+Are those 2 the same?
+
+Task 1-3
+a) H1, the user is aware that the upload started and is in progress
+b) H4 , software from the same suite (office) follow similar interfaces where common aspects are 
+    involved / use real-world terms that are suggestive to their purpose
+c) H3 The user knows where they are, and can easily access something else if the current choice is proven 'wrong' 
+d) H5 - less likely to cancel and lose all progress
+
+Task 1-4
+01)
+02)
+03)
+04)
+05)
+06)
+07)
+08)
+09)
+10)
